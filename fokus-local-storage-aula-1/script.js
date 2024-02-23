@@ -1,3 +1,4 @@
+
 const html = document.querySelector('html')
 const focoBt = document.querySelector('.app__card-button--foco')
 const curtoBt = document.querySelector('.app__card-button--curto')
@@ -38,7 +39,7 @@ focoBt.addEventListener('click', () => {
 })
 
 curtoBt.addEventListener('click', () => {
-    tempoDecorridoEmSegundos = 300
+    tempoDecorridoEmSegundos =300
     alterarContexto('descanso-curto')
     curtoBt.classList.add('active')
 })
@@ -82,33 +83,40 @@ function alterarContexto(contexto) {
 const contagemRegressiva = () => {
     if (tempoDecorridoEmSegundos <= 0) {
         beepAudio.play()
-        alert('Tempo finalizado!')
+        alert('tempo finalizado')
+        const focoAtivo =  html.getAttribute('data-contexto') =='foco'
+        if (focoAtivo) {
+            const evento = new CustomEvent
+        }
         zerar()
+
         return
     }
     tempoDecorridoEmSegundos -= 1
     mostrarTempo()
 }
 
-startPauseBt.addEventListener('click', iniciarOuPausar)
+startPauseBt, addEventListener('click', iniciarOuPausar)
 
 function iniciarOuPausar() {
     if (intervaloId) {
-        pauseAudio.play()
+        pauseAudio.pause()
         zerar()
         return
     }
     playAudio.play()
     intervaloId = setInterval(contagemRegressiva, 1000)
     iniciarOuPausarBt.textContent = "Pausar"
-    iniciarOuPausarBt.setAttribute('src', `/imagens/pause.png`)
+    imgPausa.setAttribute('src', `./imagens/pause.png`)
+
+
 }
 
 function zerar() {
     clearInterval(intervaloId)
     iniciarOuPausarBt.textContent = "Começar"
-    iniciarOuPausarBt.setAttribute('src', `/imagens/play_arrow.png`)
     intervaloId = null
+    imgPlay.setAttribute('src', `./imagens/play_arrow.png`)
 }
 
 function mostrarTempo() {
